@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>com.github.konwas.promptrefiner</id>
+    <name>Prompt Refiner</name>
+    <vendor email="konwas.kw@gmail.com" url="https://github.com/KonWas">KonWas</vendor>
+
+    <description><![CDATA[
+        Refines a developer's rough question into a clear, structured prompt
+        suitable for pasting into a coding assistant. Uses a local LLM via Ollama.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceImplementation="com.github.konwas.promptrefiner.settings.PluginSettings"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.konwas.promptrefiner.settings.PluginSettingsConfigurable"
+                id="com.github.konwas.promptrefiner.settings.PluginSettingsConfigurable"
+                displayName="Prompt Refiner"/>
+    </extensions>
+
+    <actions>
+        <action id="com.github.konwas.promptrefiner.RefinePromptAction"
+                class="com.github.konwas.promptrefiner.action.RefinePromptAction"
+                text="Refine Prompt with AI"
+                description="Refine a rough question into a structured prompt using a local LLM">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="control alt P"/>
+        </action>
+    </actions>
+</idea-plugin>
